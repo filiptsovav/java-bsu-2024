@@ -1,5 +1,8 @@
 package by.bsu.dependency.context;
 
+import by.bsu.dependency.exceptions.ApplicationContextNotStartedException;
+import by.bsu.dependency.exceptions.NoSuchBeanException;
+
 public interface ApplicationContext {
 
     /**
@@ -31,7 +34,7 @@ public interface ApplicationContext {
      * один и тот же объект, а для {@code PROTOTYPE} - каждый раз новый объект.
      *
      * @param name имя бина
-     * @throws NoSuchBeanDefinitionException если бин с таким именем не был объявлен.
+     * @throws NoSuchBeanException если бин с таким именем не был объявлен.
      * @throws ApplicationContextNotStartedException если контекст еще не запущен
      * @return соответствующий инстанс бина
      */
@@ -42,7 +45,7 @@ public interface ApplicationContext {
      * один и тот же объект, а для {@code PROTOTYPE} - каждый раз новый объект.
      *
      * @param clazz класс бина
-     * @throws NoSuchBeanDefinitionException если бин такого типа не был объявлен.
+     * @throws NoSuchBeanException если бин такого типа не был объявлен.
      * @throws ApplicationContextNotStartedException если контекст еще не запущен
      * @return соответствующий инстанс бина
      * @param <T> тип бина
@@ -53,7 +56,7 @@ public interface ApplicationContext {
      * Проверяет, имеет ли бин скоуп {@code SINGLETON}
      *
      * @param name имя бина
-     * @throws NoSuchBeanDefinitionException если бин такого типа не был объявлен.
+     * @throws NoSuchBeanException если бин такого типа не был объявлен.
      * @return {@code true}, если бин имеет скоуп {@code SINGLETON}, иначе {@code false}.
      */
     boolean isSingleton(String name);
@@ -62,8 +65,9 @@ public interface ApplicationContext {
      * Проверяет, имеет ли бин скоуп {@code PROTOTYPE}
      *
      * @param name имя бина
-     * @throws NoSuchBeanDefinitionException если бин такого типа не был объявлен.
+     * @throws NoSuchBeanException если бин такого типа не был объявлен.
      * @return {@code true}, если бин имеет скоуп {@code PROTOTYPE}, иначе {@code false}.
      */
     boolean isPrototype(String name);
+
 }

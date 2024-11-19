@@ -4,6 +4,7 @@ import by.VeranikaFiliptsova.quizer.Result;
 
 public class TextExpressionMathTask extends ExpressionMathTask{
 
+
     public TextExpressionMathTask(ExpressionMathTask task) {
         super(task.num1, task.operation, task.num2);
     }
