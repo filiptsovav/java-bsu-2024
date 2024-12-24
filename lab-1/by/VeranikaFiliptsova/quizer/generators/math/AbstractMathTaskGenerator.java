@@ -1,12 +1,9 @@
 package by.VeranikaFiliptsova.quizer.generators.math;
 
-import by.VeranikaFiliptsova.quizer.Task;
 import by.VeranikaFiliptsova.quizer.tasks.math.MathTask;
 
 import java.util.EnumSet;
 import java.util.Random;
-
-import static java.lang.Math.abs;
 
 abstract public class AbstractMathTaskGenerator<T extends MathTask> implements MathTaskGenerator<T>{
     int minNumb;
@@ -49,6 +46,22 @@ abstract public class AbstractMathTaskGenerator<T extends MathTask> implements M
 
     public int randUsual() {
         return minNumb + rand.nextInt(maxNumb - minNumb + 1);
+    }
+
+    public int generateNonZero() {
+        int n = 0;
+        while (n == 0) {
+            n = randUsual();
+        }
+        return n;
+    }
+
+    int generateInScopePositive(int n) {
+        return n * ((minNumb + n - 1)/n + rand.nextInt((maxNumb - minNumb)/n + 1));
+    }
+
+    int generateInScopeNegative(int n) {
+        return n * ((maxNumb + n - 1)/n + rand.nextInt((minNumb - maxNumb)/n + 1));
     }
 
 }

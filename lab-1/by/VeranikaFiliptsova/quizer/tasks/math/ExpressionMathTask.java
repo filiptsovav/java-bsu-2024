@@ -19,7 +19,7 @@ public class ExpressionMathTask extends AbstractMathTask {
 
     @Override
     public String getText() {
-        return num1 + Operation.myValueOf(operation) + myValueOf(num2) + "=";
+        return num1 + operation.getSymbol() + myValueOf(num2) + "=";
     }
 
     @Override

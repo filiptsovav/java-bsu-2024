@@ -4,23 +4,25 @@ import by.VeranikaFiliptsova.quizer.Task;
 
 public interface MathTask extends Task {
     enum Operation {
-        SUM,
-        DIFF,
-        MUL,
-        DIV;
 
-        public static String myValueOf(Operation op) {
-            return switch (op) {
-                case SUM-> "+";
-                case DIFF-> "-";
-                case MUL->"*";
-                case DIV->"/";
-            };
+        SUM("+"),
+        DIFF("-"),
+        MUL("*"),
+        DIV("/");
+
+        Operation(String symbol) {
+            this.symbol = symbol;
         }
+
+        public String getSymbol(){
+            return symbol;
+        }
+        private final String symbol;
     }
-    public String myValueOf(int a);
+    String myValueOf(int a);
     /**
      @return правильный ответ
      */
     int calculate();
+
 }

@@ -5,8 +5,8 @@ import by.VeranikaFiliptsova.quizer.Result;
 public class TextExpressionMathTask extends ExpressionMathTask{
 
 
-    public TextExpressionMathTask(ExpressionMathTask task) {
-        super(task.num1, task.operation, task.num2);
+    public TextExpressionMathTask(int n1, Operation op, int n2) {
+        super(n1, op, n2);
     }
 
     public int calculate() {

@@ -45,14 +45,9 @@ public class PoolTaskGenerator implements TaskGenerator<Task> {
             throw new RuntimeException("The list of tasks in the pool is empty");
         }
         int steps = rand.nextInt(list.size());
-        var iter = list.iterator();
-        while (steps > 0) {
-            iter.next();
-            steps--;
-        }
-        Task task = iter.next();
+        Task task = list.get(steps);
         if (!duplicate){
-            iter.remove();
+            list.remove(steps);
         }
         return task;
     }

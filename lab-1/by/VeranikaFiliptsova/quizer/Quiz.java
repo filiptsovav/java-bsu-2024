@@ -2,7 +2,6 @@ package by.VeranikaFiliptsova.quizer;
 
 import by.VeranikaFiliptsova.quizer.exceptions.QuizNotFinishedException;
 
-import java.util.Scanner;
 
 public class Quiz {
     int counter;
@@ -11,34 +10,35 @@ public class Quiz {
     int counterIncInput;
     Task currentTask;
     TaskGenerator<? extends Task> currentGenerator;
+    Result currentRes;
 
     Quiz(TaskGenerator<? extends Task> generator, int taskCount) {
-        currentTask = generator.generate();
         currentGenerator = generator;
         counter = taskCount;
+        currentRes = Result.OK;
     }
 
 
     Task nextTask() {
-        return currentGenerator.generate();
+        if (currentRes != Result.INCORRECT_INPUT) {
+            currentTask = currentGenerator.generate();
+        }
+        return currentTask;
     }
 
 
     Result provideAnswer(String answer) {
-        Result currentResult = currentTask.validate(answer);
-        if (currentResult == Result.OK) {
-            System.out.println("Верно");
+        currentRes = currentTask.validate(answer);
+        if (currentRes == Result.OK) {
             counterOK++;
             counter--;
-        } else if (currentResult == Result.WRONG) {
-            System.out.println("Неверно");
+        } else if (currentRes == Result.WRONG) {
             counterWrong++;
             counter--;
         } else {
-            System.out.println("Неверный ввод");
             counterIncInput++;
         }
-        return currentResult;
+        return currentRes;
     }
 
 
@@ -66,18 +66,6 @@ public class Quiz {
             return 10 * (double) getCorrectAnswerNumber() /(getCorrectAnswerNumber() + getWrongAnswerNumber());
         }
         throw new QuizNotFinishedException();
-    }
-
-    void execute() {
-        Scanner console = new Scanner(System.in);
-        while (!isFinished()) {
-            System.out.println(currentTask.getText());
-            String answer = console.next();
-            Result res = provideAnswer(answer);
-            if (res != Result.INCORRECT_INPUT) {
-                currentTask = nextTask();
-            }
-        }
     }
 
 }

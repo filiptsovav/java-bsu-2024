@@ -36,18 +36,15 @@ public class GroupTaskGenerator implements TaskGenerator<Task> {
      *         Если все генераторы выбрасывают исключение, то и тут выбрасывается исключение.
      */
     public Task generate() {
+        Random rand = new Random();
         while (!list.isEmpty()) {
-            Random rand = new Random();
             int i = rand.nextInt(list.size());
             TaskGenerator<? extends Task> gen = list.get(i);
-            Task task;
             try {
-                task = gen.generate();
+                return gen.generate();
             } catch (RuntimeException ex) {
                 list.remove(i);
-                continue;
             }
-            return task;
         }
         throw new GeneratorNotValidException("all the generators in group thrown exceptions");
     }

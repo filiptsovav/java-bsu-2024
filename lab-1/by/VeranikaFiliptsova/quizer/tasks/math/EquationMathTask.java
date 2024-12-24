@@ -12,25 +12,6 @@ public class EquationMathTask extends AbstractMathTask {
     }
 
     public int calculate() {
-//        switch (operation) {
-//            case SUM : {
-//                return num2 - num1;
-//            }
-//            case DIFF : {
-//                System.out.println("xStart = " +xStart);
-//                System.out.println("xStart ? num2 + num1 : num1 - num2");
-//                return xStart ? num2 + num1 : num1 - num2;
-//            }
-//            case MUL : {
-//                return num2 / num1;
-//            }
-//            case DIV : {
-//                System.out.println("xStart = " +xStart);
-//                System.out.println("xStart ? num1 * num2 : num1 / num2;");
-//                return xStart ? num1 * num2 : num1 / num2;
-//            }
-//        }
-//        return num1;
         return switch(operation) {
             case SUM -> num2 - num1;
             case DIFF -> xStart ? num2 + num1 : num1 - num2;
@@ -41,8 +22,8 @@ public class EquationMathTask extends AbstractMathTask {
 
     @Override
     public String getText() {
-        if (xStart) return "x"+Operation.myValueOf(operation)+myValueOf(num1)+"="+num2;
-        return myValueOf(num1)+Operation.myValueOf(operation)+"x"+"="+num2;
+        if (xStart) return "x"+operation.getSymbol()+myValueOf(num1)+"="+num2;
+        return myValueOf(num1)+operation.getSymbol()+"x"+"="+num2;
     }
 
     @Override
